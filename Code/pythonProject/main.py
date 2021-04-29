@@ -75,7 +75,6 @@ def translateText(textToTranslate):
                   46: '⠲',  # .
                   33: '⠖',  # !
                   63: '⠦',  # ?
-                  8216: '⠄',  # ‘
                   8220: '⠘⠴',  # “ (close)
                   8221: '⠘⠦',  # ” (open)
                   8216: '⠄⠴', # ' (close)
@@ -103,16 +102,16 @@ def translateText(textToTranslate):
                 letter = letter.translate(dictionary)
                 translatedText = translatedText + letter
         else:
-            if numberCache == '':
+            if numberCache != '':
+                numberCache = '⠼' + numberCache.translate(dictionary)
+                translatedText = translatedText + numberCache + letter.translate(dictionary)
+                numberCache = ''
+            else:
                 if letter == ' ':
                     translatedText = translatedText + ' '
                 else:
                     letter = letter.translate(dictionary)
                     translatedText = translatedText + letter
-            else:
-                numberCache = '⠼' + numberCache.translate(dictionary)
-                translatedText = translatedText + numberCache + ' '
-                numberCache = ''
 
         i = i + 1
 
@@ -122,11 +121,8 @@ def translateText(textToTranslate):
 
     return translatedText
 
-stop = False
-while stop != True:
+
+while 1:
     textToTranslate = input('Enter:')
     translatedText = translateText(textToTranslate)
     print(translatedText)
-
-    if textToTranslate == 'Exit':
-        stop = True
