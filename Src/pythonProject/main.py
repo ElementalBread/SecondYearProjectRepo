@@ -32,7 +32,7 @@ def translateTextToBraille(textToTranslate):
                   98: '⠃',  # b
                   99: '⠉',  # c
                   267: '⠉',  # ċ
-                  100: '⠙ ',  # d
+                  100: '⠙',  # d
                   101: '⠑',  # e
                   102: '⠋',  # f
                   289: '⠾',  # ġ
@@ -75,7 +75,7 @@ def translateTextToBraille(textToTranslate):
                   33: '⠖',  # !
                   63: '⠦',  # ?
                   8220: '⠘⠴',  # “ (close)
-                  8221: '⠘⠦',  # ” (open)
+                  8221: '⠘⠦',  # ”2 (open)
                   8216: '⠄⠴', # ' (close)
                   8217: '⠄⠦', # ' (open)
                   40: '⠐⠣', # (
@@ -93,9 +93,13 @@ def translateTextToBraille(textToTranslate):
         elif letter == 'g':
             if (textToTranslate[i+1] == 'ħ'):
                 translatedText = translatedText + '⠣'
+            else:
+                translatedText = translatedText + letter.translate(dictionary)
         elif letter == 'G':
             if (textToTranslate[i+1] == 'ħ'):
-                translatedText = translatedText + '⠣'
+                translatedText = translatedText + '⠠⠣'
+            else:
+                translatedText = translatedText + letter.translate(dictionary)
         elif letter == 'ħ':
             if ((textToTranslate[i-1] != 'g') & (textToTranslate[i-1] != 'G')):
                 letter = letter.translate(dictionary)
